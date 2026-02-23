@@ -7,7 +7,7 @@
     <div class="profile-container">
         <img src="{{ isset($settings['profile_image_path']) ? asset($settings['profile_image_path']) : asset('images/profile_picture_1770985465852.png') }}" alt="Profile Picture" class="profile-img">
     </div>
-    <h3>{{ $settings['hero_greeting'] ?? "Hi! I'm John Doe" }}</h3>
+    <h3>{{ $settings['hero_greeting'] ?? "Hi! I'm Rainish Mistry" }}</h3>
     <h1>{{ $settings['hero_headline'] ?? "Senior Web Developer based in New York." }}</h1>
     <p>{{ $settings['hero_description'] ?? "I am a backend-focused full-stack developer with 10+ years of experience building scalable applications with Laravel, Vue.js, and modern cloud technologies." }}</p>
     
@@ -35,15 +35,15 @@
             
             <div class="stats-grid">
                 <div class="stat-card">
-                    <span class="stat-number">{{ $settings['about_experience_years'] ?? '10+' }}</span>
+                    <span class="stat-number">{{ $settings['about_experience_years'] ?? '6+' }}</span>
                     <span>Years Exp.</span>
                 </div>
                 <div class="stat-card">
-                    <span class="stat-number">{{ $settings['about_projects_completed'] ?? '50+' }}</span>
+                    <span class="stat-number">{{ $settings['about_projects_completed'] ?? '5+' }}</span>
                     <span>Projects</span>
                 </div>
                 <div class="stat-card">
-                    <span class="stat-number">{{ $settings['about_clients_satisfied'] ?? '20+' }}</span>
+                    <span class="stat-number">{{ $settings['about_clients_satisfied'] ?? '3+' }}</span>
                     <span>Clients</span>
                 </div>
             </div>
@@ -109,9 +109,9 @@
             <h3>Contact Information</h3>
             <p>Feel free to reach out via email or social media.</p>
             <ul style="margin-top: 20px; list-style: none;">
-                <li style="margin-bottom: 10px;">📧 {{ $settings['contact_email'] ?? 'contact@johndoe.com' }}</li>
-                <li style="margin-bottom: 10px;">📍 {{ $settings['contact_address'] ?? 'New York, USA' }}</li>
-                <li>📱 {{ $settings['contact_phone'] ?? '+1 (555) 123-4567' }}</li>
+                <li style="margin-bottom: 10px;">📧 {{ $settings['contact_email'] ?? 'rainish.developer@gmail.com' }}</li>
+                <li style="margin-bottom: 10px;">📍 {{ $settings['contact_address'] ?? 'Surat, Gujarat, India' }}</li>
+                <li>📱 {{ $settings['contact_phone'] ?? '+91 7567910005' }}</li>
             </ul>
         </div>
         <div class="contact-form">

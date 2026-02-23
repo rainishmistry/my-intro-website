@@ -1,5 +1,5 @@
 <nav class="navbar">
-    <div class="nav-logo">DevName.</div>
+    <div class="nav-logo">Rainish Mistry</div>
     <div class="nav-links">
         <a href="#home" class="active">Home</a>
         <a href="#about">About me</a>
