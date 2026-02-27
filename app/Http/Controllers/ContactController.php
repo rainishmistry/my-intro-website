@@ -33,6 +33,10 @@ class ContactController extends Controller
             \Illuminate\Support\Facades\Log::error('Contact Email Failed: ' . $e->getMessage());
         }
 
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json(['success' => true, 'message' => 'Thank you! Your message has been sent successfully.']);
+        }
+
         return back()->with('success', 'Thank you! Your message has been sent successfully.');
     }
 }

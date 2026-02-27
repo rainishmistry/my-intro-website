@@ -115,13 +115,15 @@
             </ul>
         </div>
         <div class="contact-form">
+            <div id="formMessage" style="display: none; padding: 15px; border-radius: 5px; margin-bottom: 20px;"></div>
+            
             @if(session('success'))
                 <div style="background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
                     {{ session('success') }}
                 </div>
             @endif
             
-            <form action="{{ route('contact.store') }}" method="POST">
+            <form id="contactForm" action="{{ route('contact.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <input type="text" name="name" class="form-control" placeholder="Your Name" required>
@@ -132,10 +134,69 @@
                 <div class="form-group">
                     <textarea name="message" class="form-control" placeholder="Your Message" required></textarea>
                 </div>
-                <button type="submit" class="btn-contact">Send Message</button>
+                <button type="submit" id="submitBtn" class="btn-contact">Send Message</button>
             </form>
         </div>
     </div>
 </section>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    let form = this;
+    let submitBtn = document.getElementById('submitBtn');
+    let messageDiv = document.getElementById('formMessage');
+    let formData = new FormData(form);
+    
+    // UI Loading state
+    submitBtn.innerText = 'Sending...';
+    submitBtn.disabled = true;
+    messageDiv.style.display = 'none';
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        submitBtn.innerText = 'Send Message';
+        submitBtn.disabled = false;
+
+        if (data.success) {
+            form.reset();
+            messageDiv.style.display = 'block';
+            messageDiv.style.background = '#d4edda';
+            messageDiv.style.color = '#155724';
+            messageDiv.innerText = data.message;
+            
+            // Auto hide success message after 5 seconds
+            setTimeout(() => { messageDiv.style.display = 'none'; }, 5000);
+        } else {
+            // Handle validation errors (422) if any
+            let errorMsg = data.message || 'Error submitting form.';
+            if(data.errors) {
+                errorMsg = Object.values(data.errors).flat().join('\\n');
+            }
+            messageDiv.style.display = 'block';
+            messageDiv.style.background = '#f8d7da';
+            messageDiv.style.color = '#721c24';
+            messageDiv.innerText = errorMsg;
+        }
+    })
+    .catch(error => {
+        submitBtn.innerText = 'Send Message';
+        submitBtn.disabled = false;
+        messageDiv.style.display = 'block';
+        messageDiv.style.background = '#f8d7da';
+        messageDiv.style.color = '#721c24';
+        messageDiv.innerText = 'An error occurred. Please try again later.';
+    });
+});
+</script>
 
 @endsection
